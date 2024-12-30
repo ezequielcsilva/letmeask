@@ -7,51 +7,50 @@
 ![Letmeask](.github/letmeaskhome.png)
 
 <p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a><br>
-  <a href="#dia-1">Dia 1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#dia-2">Dia 2</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#dia-3">Dia 3</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#dia-4">Dia 4</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#dia-5">Dia 5</a>
+  <a href="#-tecnologias">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Project</a><br>
+  <a href="#dia-1">Day 1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#dia-2">Day 2</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#dia-3">Day 3</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#dia-4">Day 4</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#dia-5">Day 5</a>
   <br>	
-  <a href="#minhas-alterações-no-projeto">Minhas alterações no projeto</a>
+  <a href="#minhas-alterações-no-projeto">My Changes to the Project</a>
 </p>
 
 
 
 
-## ✨ Tecnologias
+## ✨ Technologies
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+This project was developed using the following technologies:
 
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Firebase](https://firebase.google.com/)
 
-## 💻 Projeto
+## 💻 Project
 
-O letmeask é um app desenvolvido durante a NLW que permite que alguém realizando lives crie uma sala para receber perguntas, tendo maior interação com o usuário.
+Letmeask is an app developed during NLW that allows someone hosting live streams to create a room to receive questions, fostering greater interaction with users.
 
 
-## Dia 1 
-<h2> Configuração de ambiente </h2>
-<p> Foi dado inicio ao aplicativo React com <code>create-react-app</code></p>
-<p>Tópicos que eu considerei importantes no dia:</p>
+## Day 1 
+<h2> Environment Setup </h2>
+<p> The React application was initialized using <code>create-react-app</code>.</p>
+<p>Key Topics Covered:</p>
 <ul>
-  <li> Introdução ao Typescript </li>
-  <li> Introdução ao Firebase </li>
-  <li> Resumo sobre SPA </li>
-  <li> Benefícios na utilizando de functions no React </li>
-  <li> Introdução a Hooks </li>
+  <li> Introduction to TypeScript </li>
+  <li> Introduction to Firebase </li>
+  <li> Overview of SPA (Single Page Applications) </li>
+  <li> Benefits of using functions in React </li>
+  <li> Introduction to Hooks </li>
 </ul>
 
 
-## Dia 2 
-<h2> Páginas iniciais e autenticação </h2>
-<p> Uma bomba de conteúdo! Começamos com uma simples página com HTML e SCSS e então partimos para o início do método de autenticação. </p>
-<p> Primeiro fizemos a integração do <code>react-router-dom</code> para navegar pelas páginas, então fizemos o método de login pelo google utilizando o firebase. Com uma função assíncrona <code>async function signInWithGoogle()</code> definimos o provedor como <code>const provider = firebase.auth.GoogleAuthProvider()</code> e definimos o resultado como <code>const result = await auth.signInWithPopup(provider)</code></p>
-<p> Nesse ponto, se o cliente concluir a autenticação já temos um <code>result</code> com várias informações, que permite a gente a criar uma estrutura condicional para o nosso código, então podemos checar se o cliente tem foto, nome. </p>
+## Day 2 
+<h2> Initial Pages and Authentication </h2>
+<p> First, we integrated <code>react-router-dom</code> for page navigation. Then, we implemented Google login using Firebase. Using an asynchronous function <code>async function signInWithGoogle()</code>, we set up the provider as <code>const provider = firebase.auth.GoogleAuthProvider()</code> and defined the result as <code>const result = await auth.signInWithPopup(provider)</code>.</p>
+<p> At this point, once the client completes authentication, we have a <code>result</code> with various details. This allows us to create conditional structures in our code, enabling us to check if the client has a photo or name. </p>
      
       if (result.user) {
       const { displayName, photoURL, uid} = result.user;
@@ -68,10 +67,11 @@ O letmeask é um app desenvolvido durante a NLW que permite que alguém realizan
       };
 
 
-<p> Se o usuário não possuir um nome e foto de perfil, a função retornará um erro com uma string, se ele tem todos os dados, a função vai "setar" o estado com os dados novos do usuário.</p>
-<p>Para manter os dados do usuário caso ele atualize a página foi utilizado o <code>useEffect</code>, foi usado dentro da função um observador para garantir que o objeto Auth não esteja em um estado intermediário (como inicialização) ao identificar o usuário atual.
+<p> If the user does not have a name and profile picture, the function will return an error with a string. If the user has all the necessary data, the function will "set" the state with the user's new information.
+ </p>
+<p>To persist user data in case they refresh the page, the `<code>useEffect</code>` hook was used. Inside the function, an observer was implemented to ensure that the Auth object is not in an intermediate state (such as during initialization) when identifying the current user. </p>
 
-<p>Por fim, foi feito uma refatoração do código, todo o AuthContext foi passado para um arquivo TSX próprio, e foi criado também o arquivo UseAuth.js para simplificar o uso de hooks</p>
+<p>Finally, the code was refactored. The entire `AuthContext` was moved to its own `.tsx` file, and a `UseAuth.js` file was created to simplify the use of hooks./p>
 
     import { useContext } from 'react';
     import { AuthContext } from '../contexts/AuthContext';
@@ -81,12 +81,11 @@ O letmeask é um app desenvolvido durante a NLW que permite que alguém realizan
       return value
     };
 
-## Dia 3 
-<h2> Criando novas salas e novas perguntas</h2>
+## Day 3 
+<h2> Creating New Rooms and New Questions</h2>
 
-<p>Para criar uma nova sala no database do firebase precisamos da função 
-  <code>firebase.database().ref()</code> que retorna uma referência, que é uma localização dentro da database do Firebase.
-assim podemos escrever :</p>
+<p>o create a new room in the Firebase database, we use the function `firebase.database().ref()` which returns a reference—a specific location within the Firebase database. 
+This allows us to write the following:</p>
 
       const roomRef = database.ref('rooms');
 
